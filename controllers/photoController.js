@@ -27,9 +27,24 @@ const uploadPhoto = async (req, res) => {
   }
 };
 
+const getPhotos = async (req, res) => {
+  try {
+    const photos = await Photo.find({}).sort({ createdAt: -1 });
+    res.status(200).json(photos);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to retrieve photos', error: err.message });
+  }
+};
+
 const getUserPhotos = async (req, res) => {
   try {
-    const photos = await Photo.find({ uploadedBy: req.user.userId }).sort({ createdAt: -1 });
+    const filter = { uploadedBy: req.user.userId };
+
+    if (req.query.visibility && req.query.visibility !== 'all') {
+      filter.visibility = req.query.visibility;
+    }
+
+    const photos = await Photo.find(filter).sort({ createdAt: -1 });
     res.status(200).json(photos);
   } catch (err) {
     res.status(500).json({ message: 'Failed to retrieve photos', error: err.message });
@@ -91,4 +106,4 @@ const updatePhoto = async (req, res) => {
   }
 };
 
-module.exports = { uploadPhoto, getUserPhotos, deletePhoto, updatePhoto };
+module.exports = { uploadPhoto, getUserPhotos, getPhotos, deletePhoto, updatePhoto };

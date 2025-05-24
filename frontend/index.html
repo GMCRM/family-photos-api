@@ -10,6 +10,8 @@
   <header>
     <button id="signout-btn" style="margin-right: 1rem;">Sign Out</button>
     <h1>Family Photos</h1>
+    <button id="toggle-upload-btn" style="position: absolute; right: 6rem; display: none;">Upload Photo</button>
+    <button id="account-options-btn" style="position: absolute; right: 1rem; display: none;">Account</button>
   </header>
 
   <main>
@@ -33,27 +35,35 @@
     </section>
 
     <section id="upload-section" style="display:none;">
-      <button id="toggle-upload-btn" style="margin-bottom: 1rem;">Upload Photo</button>
-
       <form id="upload-form" enctype="multipart/form-data" style="display:none;">
         <input type="file" id="photo" name="photo" required />
         <input type="text" id="caption" placeholder="Caption" />
         <input type="text" id="tags" placeholder="Tags (comma separated)" />
-        <select id="visibility">
-          <option value="family">Family</option>
-          <option value="private">Private</option>
-        </select>
         <button type="submit">Upload</button>
       </form>
     </section>
 
     <section id="gallery-section" style="display:none;">
-      <h2>Your Photos</h2>
       <div id="gallery"></div>
+      <button id="done-editing-btn" style="display: none; margin-top: 1rem;">Done Editing</button>
+    </section>
+
+    <section id="account-section" style="display:none; margin-top: 2rem;">
+      <h2>Account Options</h2>
+      <a href="https://family-photos-api.onrender.com/api-docs/#/Auth/get_auth_users" target="_blank">
+        <button>View Swagger Docs</button>
+      </a>
+      <button id="edit-profile-btn">Edit Profile</button>
+      <button id="edit-photos-btn">Edit Photos</button>
+
+      <form id="edit-profile-form" style="display: none; margin-top: 1rem;">
+        <input type="text" id="edit-displayname" placeholder="New Display Name" />
+        <input type="password" id="edit-password" placeholder="New Password" />
+        <button type="submit">Save Changes</button>
+        <button type="button" id="delete-account-btn" style="margin-left: 1rem;">Delete Account</button>
+      </form>
     </section>
   </main>
-
-</main>
 
   <!-- Photo Modal -->
   <div id="photo-modal" class="modal" style="display:none;">

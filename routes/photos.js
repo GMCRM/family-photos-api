@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { uploadPhoto, getUserPhotos, deletePhoto, updatePhoto } = require('../controllers/photoController');
+const { uploadPhoto, getPhotos, deletePhoto, updatePhoto } = require('../controllers/photoController');
 const verifyToken = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
 
@@ -49,7 +49,7 @@ router.post('/', verifyToken, upload.single('photo'), uploadPhoto);
  *       200:
  *         description: List of user photos
  */
-router.get('/', verifyToken, getUserPhotos);
+router.get('/', verifyToken, getPhotos);
 
 /**
  * @swagger
