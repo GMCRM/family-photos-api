@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Family Photos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <button id="signout-btn" style="margin-right: 1rem;">Sign Out</button>
+    <h1>Family Photos</h1>
+  </header>
+
+  <main>
+    <section id="auth-section">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+
+      <button id="toggle-signup-btn" style="margin-top: 1rem;">Create Account</button>
+
+      <form id="signup-form" style="display:none; margin-top: 1rem;">
+        <input type="email" id="signup-email" placeholder="Email" required />
+        <input type="password" id="signup-password" placeholder="Password" required />
+        <input type="text" id="signup-displayname" placeholder="Display Name" />
+        <input type="text" id="signup-family-password" placeholder="Family Password" required />
+        <button type="submit">Signup</button>
+      </form>
+    </section>
+
+    <section id="upload-section" style="display:none;">
+      <button id="toggle-upload-btn" style="margin-bottom: 1rem;">Upload Photo</button>
+
+      <form id="upload-form" enctype="multipart/form-data" style="display:none;">
+        <input type="file" id="photo" name="photo" required />
+        <input type="text" id="caption" placeholder="Caption" />
+        <input type="text" id="tags" placeholder="Tags (comma separated)" />
+        <select id="visibility">
+          <option value="family">Family</option>
+          <option value="private">Private</option>
+        </select>
+        <button type="submit">Upload</button>
+      </form>
+    </section>
+
+    <section id="gallery-section" style="display:none;">
+      <h2>Your Photos</h2>
+      <div id="gallery"></div>
+    </section>
+  </main>
+
+</main>
+
+  <!-- Photo Modal -->
+  <div id="photo-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="modal-close" class="close">&times;</span>
+      <img id="modal-image" src="" alt="Enlarged photo" />
+      <p id="modal-caption"></p>
+      <p id="modal-tags"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

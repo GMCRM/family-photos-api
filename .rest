@@ -1,0 +1,88 @@
+//photo id: 6830e5160c842850c84c9a1a
+//token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMwZGFlZjk2NzE3OThkMjYyOTgzODgiLCJlbWFpbCI6Ik5ld1Rlc3RAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDgwMzI3NzUsImV4cCI6MTc0ODExOTE3NX0.DjrpkDfNlGGmMhYQXhQ4zFTa2swrYQRZ4E-9ei1IolY
+
+//Swagger UI
+//http://localhost:3000/api-docs
+
+### Signup new user
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123",
+  "displayName": "Test User",
+  "familyPassword": "SuperSecretCode"
+}
+
+### Login user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Get all photos uploaded by user (replace <TOKEN>)
+GET http://localhost:3000/photos
+Authorization: Bearer <TOKEN>
+
+### Upload a photo with URL (replace <TOKEN>)
+POST http://localhost:3000/photos
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "url": "https://example.com/familyphoto.jpg",
+  "caption": "Family vacation 2025",
+  "tags": ["vacation", "family"],
+  "visibility": "family"
+}
+
+### Upload a photo file (replace <TOKEN>)
+POST http://localhost:3000/photos
+Authorization: Bearer <TOKEN>
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="photo"; filename="photo.jpg"
+Content-Type: image/jpeg
+
+< ./path-to-local-photo.jpg
+--boundary--
+
+### Update a photo by ID (replace <TOKEN> and <PHOTO_ID>)
+PUT http://localhost:3000/photos/<PHOTO_ID>
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "caption": "Updated caption",
+  "tags": ["new", "tags"],
+  "visibility": "private"
+}
+
+### Delete a photo by ID (replace <TOKEN> and <PHOTO_ID>)
+DELETE http://localhost:3000/photos/<PHOTO_ID>
+Authorization: Bearer <TOKEN>
+
+### Update user info (replace <TOKEN>)
+PUT http://localhost:3000/auth
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "displayName": "New DisplayName",
+  "password": "newpassword123"
+}
+
+### Delete user (replace <TOKEN>)
+DELETE http://localhost:3000/auth
+Authorization: Bearer <TOKEN>
+
+
+
+
+
+
