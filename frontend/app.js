@@ -410,3 +410,44 @@ document.getElementById('done-editing-btn').addEventListener('click', () => {
 document.getElementById('visibility-filter').addEventListener('change', (e) => {
   fetchAndDisplayPhotos(e.target.value);
 });
+
+// Edit profile form submission (update display name and/or password)
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('edit-profile-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem('token');
+    if (!token) return alert('You must be logged in.');
+
+    const displayName = document.getElementById('edit-displayname').value.trim();
+    const password = document.getElementById('edit-password').value.trim();
+
+    if (!displayName && !password) {
+      alert('Please enter a new display name or password.');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/auth', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ displayName, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to update user.');
+      }
+
+      alert('Profile updated successfully! Please sign out and sign back in to see changes.');
+      document.getElementById('edit-profile-form').reset();
+    } catch (err) {
+      console.error('Update error:', err);
+      alert('An error occurred while updating your profile.');
+    }
+  });
+});

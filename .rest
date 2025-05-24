@@ -1,3 +1,4 @@
+//For Testing 
 //photo id: 6830e5160c842850c84c9a1a
 //token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMwZGFlZjk2NzE3OThkMjYyOTgzODgiLCJlbWFpbCI6Ik5ld1Rlc3RAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDgwMzI3NzUsImV4cCI6MTc0ODExOTE3NX0.DjrpkDfNlGGmMhYQXhQ4zFTa2swrYQRZ4E-9ei1IolY
 
@@ -84,5 +85,80 @@ Authorization: Bearer <TOKEN>
 
 
 
+### Render: Signup new user
+POST https://family-photos-api.onrender.com/auth/signup
+Content-Type: application/json
 
+{
+  "email": "test@example.com",
+  "password": "password123",
+  "displayName": "Test User",
+  "familyPassword": "SuperSecretCode"
+}
+
+### Render: Login user
+POST https://family-photos-api.onrender.com/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Render: Get all photos uploaded by user (replace <TOKEN>)
+GET https://family-photos-api.onrender.com/photos
+Authorization: Bearer <TOKEN>
+
+### Render: Upload a photo with URL (replace <TOKEN>)
+POST https://family-photos-api.onrender.com/photos
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "url": "https://example.com/familyphoto.jpg",
+  "caption": "Family vacation 2025",
+  "tags": ["vacation", "family"],
+  "visibility": "family"
+}
+
+### Render: Upload a photo file (replace <TOKEN>)
+POST https://family-photos-api.onrender.com/photos
+Authorization: Bearer <TOKEN>
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="photo"; filename="photo.jpg"
+Content-Type: image/jpeg
+
+< ./path-to-local-photo.jpg
+--boundary--
+
+### Render: Update a photo by ID (replace <TOKEN> and <PHOTO_ID>)
+PUT https://family-photos-api.onrender.com/photos/<PHOTO_ID>
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "caption": "Updated caption",
+  "tags": ["new", "tags"],
+  "visibility": "private"
+}
+
+### Render: Delete a photo by ID (replace <TOKEN> and <PHOTO_ID>)
+DELETE https://family-photos-api.onrender.com/photos/<PHOTO_ID>
+Authorization: Bearer <TOKEN>
+
+### Render: Update user info (replace <TOKEN>)
+PUT https://family-photos-api.onrender.com/auth
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "displayName": "New DisplayName",
+  "password": "newpassword123"
+}
+
+### Render: Delete user (replace <TOKEN>)
+DELETE https://family-photos-api.onrender.com/auth
+Authorization: Bearer <TOKEN>
 

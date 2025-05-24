@@ -78,21 +78,27 @@ const updateUser = async (req, res) => {
     const userId = req.user.userId;
     const { displayName, password } = req.body;
 
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+    console.log('Incoming update body:', req.body);
 
-    if (displayName !== undefined) user.displayName = displayName;
+    const update = {};
+    if (displayName) update.displayName = displayName;
 
     if (password) {
       const passwordHash = await bcrypt.hash(password, 10);
-      user.passwordHash = passwordHash;
+      update.passwordHash = passwordHash;
     }
 
-    await user.save();
+    if (Object.keys(update).length === 0) {
+      return res.status(400).json({ message: 'No valid fields provided for update' });
+    }
 
-    res.status(200).json({ message: 'User updated successfully', user });
+    const updatedUser = await User.findByIdAndUpdate(userId, update, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User updated successfully', user: updatedUser });
   } catch (err) {
     res.status(500).json({ message: 'Failed to update user', error: err.message });
   }
