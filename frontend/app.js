@@ -1,3 +1,4 @@
+const BASE_URL = 'https://family-photos-api.onrender.com';
 function checkAuthOnLoad() {
   const token = localStorage.getItem('token');
   const signoutBtn = document.getElementById('signout-btn');
@@ -45,7 +46,7 @@ loginForm.addEventListener('submit', async (e) => {
   const password = loginPassword.value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/auth/login', {
+    const res = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -100,7 +101,7 @@ signupForm.addEventListener('submit', async (e) => {
   const familyPassword = signupFamilyPassword.value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/auth/signup', {
+    const res = await fetch(`${BASE_URL}/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, displayName, familyPassword })
@@ -152,7 +153,7 @@ async function fetchAndDisplayPhotos(filter = 'all') {
   const token = localStorage.getItem('token');
   if (!token) return;
 
-  let url = 'http://localhost:3000/photos';
+  let url = `${BASE_URL}/photos`;
   if (filter !== 'all') {
     url += `?visibility=${filter}`;
   }
@@ -201,7 +202,7 @@ async function fetchAndDisplayPhotos(filter = 'all') {
         if (newCaption !== null && newTags !== null) {
           const token = localStorage.getItem('token');
           try {
-            const res = await fetch(`http://localhost:3000/photos/${photo._id}`, {
+            const res = await fetch(`${BASE_URL}/photos/${photo._id}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
@@ -234,7 +235,7 @@ async function fetchAndDisplayPhotos(filter = 'all') {
 
         const token = localStorage.getItem('token');
         try {
-          const res = await fetch(`http://localhost:3000/photos/${photo._id}`, {
+          const res = await fetch(`${BASE_URL}/photos/${photo._id}`, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}`
@@ -285,7 +286,7 @@ uploadForm.addEventListener('submit', async (e) => {
   }
 
   try {
-    const res = await fetch('http://localhost:3000/photos', {
+    const res = await fetch(`${BASE_URL}/photos`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`
@@ -428,7 +429,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const res = await fetch('http://localhost:3000/auth', {
+      const res = await fetch(`${BASE_URL}/auth`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
