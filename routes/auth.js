@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { signup, login, updateUser, deleteUser } = require('../controllers/authController');
+const { signup, login, updateUser, deleteUser, getUsers } = require('../controllers/authController');
 const verifyToken = require('../middleware/authMiddleware');
 
 /**
@@ -95,5 +95,33 @@ router.put('/', verifyToken, updateUser);
  *         description: User deleted successfully
  */
 router.delete('/', verifyToken, deleteUser);
+
+/**
+ * @swagger
+ * /auth/users:
+ *   get:
+ *     summary: Retrieve all users
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: A list of users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   email:
+ *                     type: string
+ *                   displayName:
+ *                     type: string
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ */
+router.get('/users', verifyToken, getUsers);
 
 module.exports = router;

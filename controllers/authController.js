@@ -132,9 +132,20 @@ const deleteUser = async (req, res) => {
   }
 };
 
+
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, 'email displayName createdAt');
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch users', error: err.message });
+  }
+};
+
 module.exports = {
   signup,
   login,
   updateUser,
   deleteUser,
+  getUsers,
 };
