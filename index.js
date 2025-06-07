@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
   res.send('Family Photos API is running');
 });
 
+
 // Connect to MongoDB
 connectDB();
 

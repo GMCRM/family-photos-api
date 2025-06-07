@@ -23,6 +23,7 @@ const options = {
   apis: ['./routes/*.js'], // path to route docs
 };
 
+
 const swaggerSpec = swaggerJSDoc(options);
 
 module.exports = (app) => {

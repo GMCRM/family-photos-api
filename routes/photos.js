@@ -5,6 +5,7 @@ const { uploadPhoto, getPhotos, deletePhoto, updatePhoto } = require('../control
 const verifyToken = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
 
+
 /**
  * @swagger
  * /photos:

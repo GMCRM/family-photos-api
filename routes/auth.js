@@ -3,6 +3,7 @@ const router = express.Router();
 const { signup, login, updateUser, deleteUser, getUsers } = require('../controllers/authController');
 const verifyToken = require('../middleware/authMiddleware');
 
+
 /**
  * @swagger
  * /auth/signup:

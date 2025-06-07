@@ -3,6 +3,7 @@ const path = require('path');
 const Photo = require('../models/Photo');
 const cloudinary = require('../config/cloudinary');
 
+
 const uploadPhoto = async (req, res) => {
   try {
     const { caption, tags, visibility } = req.body;

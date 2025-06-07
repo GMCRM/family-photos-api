@@ -16,6 +16,7 @@ Content-Type: application/json
   "familyPassword": "SuperSecretCode"
 }
 
+
 ### Login user
 POST http://localhost:3000/auth/login
 Content-Type: application/json

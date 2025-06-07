@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const Photo = require('../models/Photo');
 
+
 const signup = async (req, res) => {
   try {
     const { email, password, displayName, familyPassword } = req.body;
