@@ -428,7 +428,7 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    
+  
     try {
       const res = await fetch(`${BASE_URL}/auth`, {
         method: 'PUT',
